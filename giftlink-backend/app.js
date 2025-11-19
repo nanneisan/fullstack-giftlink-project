@@ -21,11 +21,11 @@ connectToDatabase().then(() => {
 
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: true}));
 
 // Route files
-const giftRoutes = require('./routes/giftRoutes')
-const searchRoutes = require('./routes/searchRoutes')
+const giftRoutes = require('./routes/giftRoutes');
+const searchRoutes = require('./routes/searchRoutes');
 const authRoutes = require('./routes/authRoutes');
 const pinoHttp = require('pino-http');
 const logger = require('./logger');
@@ -33,7 +33,7 @@ const logger = require('./logger');
 app.use(pinoHttp({ logger }));
 app.use('/api/gifts', giftRoutes)
 app.use('/api/search', searchRoutes)
-app.use('/api/auth', authRoutes)
+app.use('/api/auth', authRoutes);
 
 // Global Error Handler
 app.use((err, req, res, next) => {
@@ -42,7 +42,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/",(req,res)=>{
-    res.send("Inside the server")
+    res.send("Inside the server");
 })
 
 app.listen(port, () => {

@@ -5,7 +5,7 @@ const connectToDatabase = require('../models/db');
 // Search for gifts
 router.get('/', async (req, res, next) => {
     try {
-        const db = await connectToDatabase()
+        const db = await connectToDatabase();
 
         const collection = db.collection("gifts");
         let query = {};

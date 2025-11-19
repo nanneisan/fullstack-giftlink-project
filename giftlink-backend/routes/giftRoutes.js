@@ -19,13 +19,13 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const db = await connectToDatabase()
+        const db = await connectToDatabase();
 
         const collection = db.collection('gifts');
 
         const id = req.params.id;
 
-        const gift = await collection.findOne({id: id})
+        const gift = await collection.findOne({id: id});
 
         if (!gift) {
             return res.status(404).send('Gift not found');

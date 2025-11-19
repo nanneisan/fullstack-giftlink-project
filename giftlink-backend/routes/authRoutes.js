@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const connectToDatabase = require('../models/db');
 const dotenv = require('dotenv');
-const pino = require('pino')
+const pino = require('pino');
 
 const logger = pino();
 
@@ -19,7 +19,7 @@ router.post('/register', async (req, res) => {
 
         const existingEmail = await collection.findOne({ email: req.body.email });
         if (existingEmail) {
-            res.status(400).json({ message: 'Email already existed'})
+            res.status(400).json({ message: 'Email already existed'});
         }
 
         const salt = await bcryptjs.genSalt(10);
@@ -32,18 +32,18 @@ router.post('/register', async (req, res) => {
             lastName: req.body.lastName,
             password: hash,
             createdAt: new Date()
-        })
+        });
 
         const payload = {
             user: {
                 id: newUser.insertedId
             }
-        }
+        };
 
         const authtoken = jwt.sign(payload, JWT_SECRET);
 
         logger.info('User registered successfully');
-        res.json({ authtoken, email })
+        res.json({ authtoken, email });
     } catch (error) {
         return res.status(500).send('Internal server error')
     }
@@ -56,11 +56,11 @@ router.post('/login', async (req, res) => {
 
         const user = await collection.findOne({ email: req.body.email });
         if (!user) {
-            return res.status(400).json({ message: 'User not found'})
+            return res.status(400).json({ message: 'User not found'});
         }
         const result = await bcryptjs.compare(req.body.password, user.password);
         if(!result){
-            return res.status(400).json({ message: 'Wrong password'})
+            return res.status(400).json({ message: 'Wrong password'});
         }
 
         const userName = user.firstName;
@@ -70,14 +70,14 @@ router.post('/login', async (req, res) => {
             user: {
                 id: user._id.toString()
             }
-        }
+        };
 
         const authtoken = jwt.sign(payload, JWT_SECRET);
 
         logger.info('User login successfully');
-        return res.json({ authtoken, userName, userEmail })
+        return res.json({ authtoken, userName, userEmail });
     } catch (error) {
-        return res.status(500).send('Internal server error')
+        return res.status(500).send('Internal server error');
     }
 });
 
@@ -111,12 +111,12 @@ router.put('/update', async (req, res) => {
             user: {
                 id: udpateUser._id.toString()
             }
-        }
+        };
         const authtoken = jwt.sign(payload, JWT_SECRET);
-        logger.info('User updated successfully')
-        res.json({authtoken})
+        logger.info('User updated successfully');
+        res.json({authtoken});
     } catch (error) {
-        return res.status(500).send('Internal server error')
+        return res.status(500).send('Internal server error');
     }
 })
 
