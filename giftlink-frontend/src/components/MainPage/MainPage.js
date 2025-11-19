@@ -25,7 +25,7 @@ function MainPage() {
     }, []);
 
     const goToDetailsPage = (productId) => {
-        navigate(`app/product/${productId}`);
+        navigate(`/app/product/${productId}`);
 
       };
 

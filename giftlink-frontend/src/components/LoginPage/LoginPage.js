@@ -35,7 +35,7 @@ function LoginPage() {
                 sessionStorage.setItem('name', json.userName);
                 sessionStorage.setItem('email', json.userEmail);
                 setIsLoggedIn(true);
-                navigate('/app')
+                navigate('/')
             } else {
                 setEmail('');
                 setPassword('');

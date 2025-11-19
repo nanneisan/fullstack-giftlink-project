@@ -9,7 +9,7 @@ const {loadData} = require("./util/import-mongo/index");
 
 
 const app = express();
-app.use("*",cors());
+app.use('*', cors());
 
 const port = 3060;
 
@@ -21,6 +21,7 @@ connectToDatabase().then(() => {
 
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 
 // Route files
 const giftRoutes = require('./routes/giftRoutes')

@@ -43,7 +43,7 @@ function SearchPage() {
         }).toString();
 
         try {
-            const response = await fetch(`${baseUrl}${queryParams}`);
+            const response = await fetch(`${baseUrl}?${queryParams}`);
             if (!response.ok) {
                 throw new Error('Search failed');
             }
@@ -61,9 +61,6 @@ function SearchPage() {
         navigate(`/app/product/${productId}`)
     };
 
-
-
-
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
@@ -76,7 +73,7 @@ function SearchPage() {
                                 <option value="">All</option>
                                 {
                                     categories.map(category => {
-                                        <option key={category} value={category}>{category}</option>
+                                        return <option key={category} value={category}>{category}</option>
                                     })
                                 }
                             </select>
@@ -86,7 +83,7 @@ function SearchPage() {
                                 <option value="">All</option>
                                 {
                                     conditions.map(condition => {
-                                        <option key={condition} value={condition}>{condition}</option>
+                                        return <option key={condition} value={condition}>{condition}</option>
                                     })
                                 }
                             </select>

@@ -8,8 +8,7 @@ router.get('/', async (req, res, next) => {
         const db = await connectToDatabase()
 
         const collection = db.collection("gifts");
-
-        let query = req.query;
+        let query = {};
 
         if (req.query.name) {
             query.name = { $regex: req.query.name, $options: "i" }; // Using regex for partial match, case-insensitive
@@ -24,7 +23,6 @@ router.get('/', async (req, res, next) => {
         if (req.query.age_years) {
             query.age_years = { $lte: parseInt(req.query.age_years) };
         }
-
         const gifts = await collection.find(query).toArray();
 
         res.json(gifts);
