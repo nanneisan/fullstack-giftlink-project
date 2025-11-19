@@ -34,7 +34,7 @@ function SearchPage() {
 
 
     const handleSearch = async () => {
-        const baseUrl = `${urlConfig.backendUrl}/api/gifts/search`;
+        const baseUrl = `${urlConfig.backendUrl}/api/search`;
         const queryParams = new URLSearchParams({
             name: searchQuery,
             age_years: ageRange,

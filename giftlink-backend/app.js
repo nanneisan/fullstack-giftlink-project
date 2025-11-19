@@ -32,7 +32,7 @@ const logger = require('./logger');
 
 app.use(pinoHttp({ logger }));
 app.use('/api/gifts', giftRoutes);
-app.use('/api/gifts/search', searchRoutes);
+app.use('/api/search', searchRoutes);
 app.use('/api/auth', authRoutes);
 
 // Global Error Handler
